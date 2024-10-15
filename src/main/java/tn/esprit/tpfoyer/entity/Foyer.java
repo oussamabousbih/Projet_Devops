@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Foyer {
 
@@ -33,6 +35,26 @@ public class Foyer {
             @ToString.Exclude
     Set<Bloc> blocs;
 
+    public Foyer(long l, String nomFoyer, long capaciteFoyer) {
+        this.idFoyer = l;
+        this.nomFoyer = nomFoyer;
+        this.capaciteFoyer = capaciteFoyer;
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Foyer foyer = (Foyer) o;
+        return capaciteFoyer == foyer.capaciteFoyer && Objects.equals(nomFoyer, foyer.nomFoyer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nomFoyer, capaciteFoyer);
+    }
 }
 
 
