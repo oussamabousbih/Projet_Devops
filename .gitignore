@@ -4,7 +4,7 @@
 # Allow specific files or directories
 !.gitignore
 !src/
-## * -> files only , ** -> files and directories
+## * -> direct-children(files-only) , ** -> all-sub-children(files+directories)
 !src/**
 !pom.xml
 !README.md
