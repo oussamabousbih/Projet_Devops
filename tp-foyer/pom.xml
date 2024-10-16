@@ -74,6 +74,7 @@
             <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
+        
 
 
     </dependencies>
@@ -94,5 +95,13 @@
             </plugin>
         </plugins>
     </build>
+    <!-- Deploy to Nexus -->
+<distributionManagement>
+<repository>
+<id>deploymentRepo</id>
+<name>Nexus Repository</name>
+<url>http://192.168.15.128:8081/repository/maven-releases/</url>
+</repository>
+</distributionManagement>
 
 </project>
