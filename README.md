@@ -1,6 +1,6 @@
 # Projet_Devops
 
-* **oussema**: Etudiant
+* **oussama**: Etudiant
 * **malek**: foyer
 * **seif**: universite
 * **ghayth**:Chambre
