@@ -3,6 +3,6 @@
 * **oussema**: Etudiant
 * **malek**: foyer
 * **seif**: universite
-* **ghayth**:
+* **ghayth**: Chambre
 * **aziz**:
 * **hichem**:
