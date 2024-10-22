@@ -55,7 +55,7 @@ class UniversiteServiceImplTest {
         // case exist
         assertEquals(1L, service.retrieveUniversite(1L).getIdUniversite(), "successfully getting the object");
         // case not exist
-        assertThrowsExactly(NoSuchElementException.class, () -> service.retrieveUniversite(10L),"exception occure since id much no object" );
+        assertNull(service.retrieveUniversite(10L),"equal null since id match no object in db" );
     }
 
     @Test
