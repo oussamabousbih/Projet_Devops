@@ -18,8 +18,7 @@ public class EtudiantRestController {
 
     @GetMapping("/retrieve-all-etudiants")
     public List<Etudiant> getEtudiants() {
-        List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
-        return listEtudiants;
+        return etudiantService.retrieveAllEtudiants();
     }
 
 

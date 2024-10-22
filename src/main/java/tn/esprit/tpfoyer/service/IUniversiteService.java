@@ -12,6 +12,5 @@ public interface IUniversiteService {
     public void removeUniversite(Long universiteId);
     public Universite modifyUniversite(Universite universite);
 
-    // Here we will add later methods calling keywords and methods calling JPQL
 
 }

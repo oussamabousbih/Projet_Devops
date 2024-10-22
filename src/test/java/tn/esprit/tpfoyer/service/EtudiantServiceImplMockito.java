@@ -1,4 +1,4 @@
-package tn.esprit.tpfoyer;
+package tn.esprit.tpfoyer.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -17,13 +17,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.repository.EtudiantRepository;
-import tn.esprit.tpfoyer.service.EtudiantServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class EtudiantServiceImplTest {
-//oussama bousbih service
     @Mock
     private EtudiantRepository etudiantRepository;
 

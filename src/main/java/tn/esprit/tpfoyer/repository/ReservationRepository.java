@@ -12,15 +12,6 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, String>
 {
 
-    /* No need to code CRUD here. Its is already in the
-    interfaces provided by the framework Spring Data JPA :
-       - CrudRepository or
-       - PagingAndSortingRepository or
-       - JpaRepository
-     */
-
-    /* Keywords : */
-
     List<Reservation> findAllByAnneeUniversitaireBeforeAndEstValide(Date d, boolean b );
 
 }

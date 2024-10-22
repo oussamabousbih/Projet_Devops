@@ -4,24 +4,20 @@ package tn.esprit.tpfoyer.service;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.repository.BlocRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-@Slf4j  // Simple Loggining Façade For Java
+@Slf4j
 public class BlocServiceImpl  implements IBlocService {
 
 
     BlocRepository blocRepository;
 
-    @Scheduled(fixedRate = 30000) // millisecondes // cron fixedRate
-    //@Scheduled(cron="0/15 * * * * *")
     public List<Bloc> retrieveAllBlocs() {
 
         List<Bloc> listB = blocRepository.findAll();
@@ -33,20 +29,7 @@ public class BlocServiceImpl  implements IBlocService {
         return listB;
     }
 
-    // Exemple sans Keywords :
-    @Transactional
-    public List<Bloc> retrieveBlocsSelonCapacite(long c) {
 
-        List<Bloc> listB = blocRepository.findAll();
-        List<Bloc> listBselonC = new ArrayList<>();
-
-        for (Bloc b: listB) {
-            if (b.getCapaciteBloc()>=c)
-                listBselonC.add(b);
-        }
-
-        return listBselonC;
-    }
 
     @Transactional
     public Bloc retrieveBloc(Long blocId) {

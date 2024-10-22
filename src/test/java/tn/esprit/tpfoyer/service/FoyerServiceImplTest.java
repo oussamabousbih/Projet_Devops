@@ -1,6 +1,5 @@
 package tn.esprit.tpfoyer.service;
 
-import static org.junit.jupiter.api.Assertions.*;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
@@ -11,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Example;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.repository.FoyerRepository;
 
@@ -30,10 +28,10 @@ public class FoyerServiceImplTest {
     FoyerServiceImpl foyerService;
 
     Foyer foyer = Foyer.builder().nomFoyer("foyer esprit").capaciteFoyer(150).build();
-    List<Foyer> listFoyer = new ArrayList<Foyer>(){
+    List<Foyer> listFoyer = new ArrayList<>() {
         {
-            add(new Foyer(1L,"foyer esb",100));
-            add(new Foyer(2L,"foyer prepa",50));
+            add(new Foyer(1L, "foyer esb", 100));
+            add(new Foyer(2L, "foyer prepa", 50));
         }
     };
 

@@ -22,7 +22,6 @@ public class Chambre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long idChambre;
-//comment by ghayth
     long numeroChambre;
 
     @Enumerated(EnumType.STRING)
