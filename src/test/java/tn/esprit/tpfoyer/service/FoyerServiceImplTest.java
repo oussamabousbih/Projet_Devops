@@ -8,7 +8,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.repository.FoyerRepository;
@@ -18,10 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.*;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
 @RequiredArgsConstructor
-public class FoyerServiceImplTest {
+class FoyerServiceImplTest {
     @Mock
     FoyerRepository foyerRepository;
     @InjectMocks
@@ -38,7 +39,7 @@ public class FoyerServiceImplTest {
     @Test
     void testRetrieveFoyer(){
 
-        Mockito.when(foyerRepository.findById(Mockito.anyLong()))
+        when(foyerRepository.findById(anyLong()))
                 .thenReturn(Optional.of(foyer));
         Foyer foyer1 = foyerService.retrieveFoyer(1L);
         Assertions.assertNotNull(foyer1);
@@ -48,31 +49,25 @@ public class FoyerServiceImplTest {
     void testAddFoyer() {
         Foyer foyersaved = Foyer.builder().idFoyer(1L).nomFoyer("foyer esprit").capaciteFoyer(150).build();
 
-        // Mock the repository behavior
-        Mockito.when(foyerRepository.save(Mockito.any(Foyer.class))).thenReturn(foyersaved);
-        // Call the service method
+        when(foyerRepository.save(any(Foyer.class))).thenReturn(foyersaved);
         Foyer foyer1 = foyerService.addFoyer(foyer);
 
-        // Assertions
         Assertions.assertNotNull(foyer1);
         Assertions.assertEquals(1L, foyer1.getIdFoyer());
-//        Assertions.assertEquals("foyer esprit", foyer1.getNomFoyer());
-//        Assertions.assertEquals(150, foyer1.getCapaciteFoyer());
 
-        // Verify that the repository method was called
-        Mockito.verify(foyerRepository).save(foyer);
+        verify(foyerRepository).save(foyer);
     }
 
     @Test
     void testretrieveAllFoyers() {
-        Mockito.<List<Foyer>>when(foyerRepository.findAll()).thenReturn(listFoyer);
+        when(foyerRepository.findAll()).thenReturn(listFoyer);
         Assertions.assertEquals(2,foyerService.retrieveAllFoyers().size());
     }
 
 
     @Test
     void retrieveFoyer() {
-        Mockito.when(foyerRepository.findById(Mockito.anyLong()))
+        when(foyerRepository.findById(anyLong()))
                 .thenReturn(listFoyer.stream()
                         .filter(f -> f.getIdFoyer().equals(1L))
                         .findFirst());
@@ -82,7 +77,7 @@ public class FoyerServiceImplTest {
     @Test
     void modifyFoyer() {
         Foyer tryfoyer = Foyer.builder().idFoyer(1L).nomFoyer("sesame").capaciteFoyer(10).build();
-        Mockito.when(foyerRepository.save(Mockito.any(Foyer.class))).thenAnswer(inv -> {
+        when(foyerRepository.save(any(Foyer.class))).thenAnswer(inv -> {
             inv.getArgument(0);
             listFoyer.get(0).setNomFoyer(tryfoyer.getNomFoyer());
             listFoyer.get(0).setCapaciteFoyer(tryfoyer.getCapaciteFoyer());
@@ -97,14 +92,8 @@ public class FoyerServiceImplTest {
     @Test
     void removeFoyer() {
 
-        // arrange
         Long foyerid = 1L;
-
-        // act
         foyerService.removeFoyer(foyerid);
-
-        // assert
-        // Mockito.verify(foyerService, Mockito.times(1)).removeFoyer(Mockito.eq(foyerid));
-        Mockito.verify(foyerRepository).deleteById(foyerid);
+        verify(foyerRepository).deleteById(foyerid);
     }
 }

@@ -13,6 +13,5 @@ public interface IReservationService {
     public void removeReservation(String reservationId);
     public Reservation modifyReservation(Reservation reservation);
 
-    // Here we will add later methods calling keywords and methods calling JPQL
     public List<Reservation> trouverResSelonDateEtStatus(Date d, boolean b);
 }

@@ -12,8 +12,6 @@ public interface IBlocService {
     public void removeBloc(Long blocId);
     public Bloc modifyBloc(Bloc bloc);
 
-    // Here we will add later methods calling keywords and methods calling JPQL
-
     public List<Bloc> trouverBlocsSansFoyer();
 
     public List<Bloc> trouverBlocsParNomEtCap(String nb, long c);
