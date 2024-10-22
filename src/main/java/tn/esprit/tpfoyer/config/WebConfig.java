@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${app.api.settings.cross-origin}")
+    @Value("${app.api.settings.cross-origin:localhost}")
     private String[] allowedOrigins;
 
     @Override
