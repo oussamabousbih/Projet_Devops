@@ -11,8 +11,8 @@ EXPOSE 8079
 
 # Set default environment variables (can be overridden at runtime)
 ENV SERVER_PORT=8079 \
-    CONTEXT_PATH='/api/foyer'
-    APP_API_SETTINGS_CROSS_ORIGIN_PATTERNS='*'
+    CONTEXT_PATH='/api/foyer' \
+    APP_API_SETTINGS_CROSS_ORIGIN_PATTERNS='*' \
     DB_HOST=mysql \
     DB_PORT=3306 \
     DB_NAME=foyer-devops-db \
