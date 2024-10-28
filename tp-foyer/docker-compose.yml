@@ -1,4 +1,4 @@
-version: '3.8'
+#version: '3.8'
 
 services:
   mysqldb:
@@ -15,7 +15,7 @@ services:
       - db_data:/var/lib/mysql
 
   app:
-    image: ghaythsel404/tp-foyer:1.0.0.
+    image: ghaythsel404/tp-foyer:1.0.0
     container_name: app_foyer
     restart: on-failure
     environment:
