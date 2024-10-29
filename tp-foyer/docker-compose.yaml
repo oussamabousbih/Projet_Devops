@@ -23,7 +23,7 @@ services:
     container_name: tp-foyer-database
     restart: on-failure
     environment:
-      MYSQL_ROOT_PASSWORD: ""  
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" 
       MYSQL_DATABASE: db
     ports:
       - "3306:3306"  
