@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: oussama2306/tp-foyer:latest
+    image: oussama2306/tp-foyer:${TAG}
     container_name: spring-application
     restart: on-failure
     ports:
