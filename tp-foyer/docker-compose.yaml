@@ -4,6 +4,7 @@ services:
   app:
     image: oussama2306/tp-foyer:${TAG}
     container_name: spring-application
+    restart: on-failure
     ports:
       - "8089:8089"  # Maps port 8089 on host to 8089 on container
     depends_on:
@@ -20,6 +21,7 @@ services:
   db:
     image: mysql:8.0
     container_name: tp-foyer-database
+    restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: ""  
       MYSQL_DATABASE: db
