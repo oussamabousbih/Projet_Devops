@@ -1,3 +1,4 @@
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.boot.actuate.metrics.MetricsEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -6,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class MetricsConfig {
 
     @Bean
-    public MetricsEndpoint metricsEndpoint() {
-        return new MetricsEndpoint();
+    public MetricsEndpoint metricsEndpoint(MeterRegistry meterRegistry) {
+        return new MetricsEndpoint(meterRegistry);
     }
 }
