@@ -21,7 +21,7 @@ services:
   db:
     image: mysql:8.0
     container_name: tp-foyer-database
-    restart: unless-stopped
+    restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: ""  
       MYSQL_DATABASE: db
