@@ -1,45 +1,30 @@
-version: '3.8'
-
+version: '3'
 services:
-  app:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devops
+    ports:
+      - "3306:3306"
+    networks:
+      - myappNetwork
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  # Spring Boot service
+  springboot-app:
     image: malekzeghouf/tp-foyer
-    container_name: tp-foyer-app
     ports:
       - "8089:8089"
     depends_on:
-      db:
-        condition: service_healthy  # This condition requires healthcheck on db service
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: "securepassword"
-      SPRING_JPA_SHOW_SQL: "true"
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SERVER_PORT: 8089
-      SERVER_SERVLET_CONTEXT_PATH: /tpfoyer
+      - mysql
     networks:
-      - app-network
-
-  db:
-    image: mysql:8.0
-    container_name: tp-foyer-db
-    environment:
-      MYSQL_ROOT_PASSWORD: "securepassword"
-      MYSQL_DATABASE: db
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-volumes:
-  db_data: {}
+      - myappNetwork
 
 networks:
-  app-network: {}
+  myappNetwork:
+
+volumes:
+  mysql-data:
