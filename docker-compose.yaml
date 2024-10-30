@@ -32,8 +32,11 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - app-network
-    healthcheck: # Add a health check to ensure MySQL is ready
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+    healthcheck:  # Add a health check to ensure MySQL is ready
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 30s
       timeout: 10s
       retries: 5
+
+volumes:
+  db_data: {}  # Declare the named volume with default settings
