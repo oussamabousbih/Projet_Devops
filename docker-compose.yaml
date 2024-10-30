@@ -5,14 +5,15 @@ services:
     image: malekzeghouf/tp-foyer
     container_name: tp-foyer-app
     ports:
-      - "8089:8089"  # Maps port 8089 on host to 8089 on container
+      - "8089:8089"
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # This condition requires healthcheck on db service
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: "root"
-      SPRING_JPA_SHOW_SQL: "true"  # Enclosed in quotes to make it a string
+      SPRING_DATASOURCE_PASSWORD: "securepassword"
+      SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SERVER_PORT: 8089
       SERVER_SERVLET_CONTEXT_PATH: /tpfoyer
@@ -23,19 +24,16 @@ services:
     image: mysql:8.0
     container_name: tp-foyer-db
     environment:
-      MYSQL_ROOT_PASSWORD: "root"  # No password
+      MYSQL_ROOT_PASSWORD: "securepassword"
       MYSQL_DATABASE: db
     ports:
-      - "3306:3306"  # Makes the MySQL DB accessible on port 3306
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:
       - app-network
-
-networks:
-  app-network:
-    driver: bridge
-
-volumes:
-  db_data:
-    driver: local
+    healthcheck: # Add a health check to ensure MySQL is ready
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
