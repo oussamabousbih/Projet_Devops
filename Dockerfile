@@ -1,5 +1,5 @@
-# Use a base image with Java
-FROM openjdk:17-jdk-alpine3.18
+# Use a base image with OpenJDK 17 based on Debian
+FROM openjdk:17-jdk-slim
 
 # Define build arguments for Nexus credentials and JAR URL
 ARG NEXUS_USERNAME
@@ -9,10 +9,8 @@ ARG JAR_URL
 # Set working directory
 WORKDIR /app
 
-# Update repository and install curl to download the JAR from Nexus
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.18/main" > /etc/apk/repositories && \
-    echo "https://dl-cdn.alpinelinux.org/alpine/v3.18/community" >> /etc/apk/repositories && \
-    apk --no-cache add curl
+# Install curl to download the JAR from Nexus
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
 # Download the JAR from Nexus
 RUN curl -u "$NEXUS_USERNAME:$NEXUS_PASSWORD" -o app.jar "$JAR_URL"
