@@ -1,14 +1,22 @@
-# Use a lightweight Java runtime image
-FROM openjdk:17-jdk-slim
+# Use a base image with Java
+FROM openjdk:17-jdk-alpine
 
-# Set a working directory in the container
+# Define build arguments for Nexus credentials and JAR URL
+ARG NEXUS_USERNAME
+ARG NEXUS_PASSWORD
+ARG JAR_URL
+
+# Set working directory
 WORKDIR /app
 
-# Copy the Spring Boot JAR file into the container
-COPY target/*.jar app.jar
+# Install curl to download the JAR from Nexus
+RUN apk --no-cache add curl
 
-# Expose the port your app runs on (default for Spring Boot is 8080)
+# Download the JAR from Nexus
+RUN curl -u $NEXUS_USERNAME:$NEXUS_PASSWORD -o app.jar $JAR_URL
+
+# Expose the application port
 EXPOSE 8089
 
-# Run the JAR file as an executable
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the application
+CMD ["java", "-jar", "app.jar"]
