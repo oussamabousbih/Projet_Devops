@@ -23,7 +23,7 @@ services:
     image: mysql:8.0
     container_name: tp-foyer-db
     environment:
-      MYSQL_ROOT_PASSWORD: ""  # No password
+      MYSQL_ROOT_PASSWORD: "root"  # No password
       MYSQL_DATABASE: db
     ports:
       - "3306:3306"  # Makes the MySQL DB accessible on port 3306
