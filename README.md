@@ -1,8 +1,8 @@
 # Projet_Devops
 
 * **oussema**: Etudiant
-* **malek**: foyer
-* **seif**: universite
+* **malek**: Foyer
+* **seif**: Universite
 * **ghayth**: Chambre
-* **aziz**:
+* **aziz**: Bloc
 * **hichem**:
