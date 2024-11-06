@@ -1,13 +1,20 @@
 package tn.esprit.tpfoyer.config;
 
-
+import io.micrometer.core.instrument.MeterRegistry;
+import org.springframework.boot.actuate.metrics.MetricsEndpoint;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfig  {
+public class WebConfig implements WebMvcConfigurer  {
 
     @Value("${app.api.settings.cross-origin.patterns:localhost}")
     private String[] allowedOriginPatterns;
